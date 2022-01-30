@@ -38,8 +38,24 @@
                     <div class="modal-body">
 
                       <div class="form-group">
+                        <label>NIM Mahasiswa</label>
+                        <input type="text" name="nim_mhs" required="required" class="form-control" placeholder="NIM Mahasiswa ..">
+                      </div>
+                      <div class="form-group">
                         <label>Nama Mahasiswa</label>
                         <input type="text" name="nama_mhs" required="required" class="form-control" placeholder="Nama Mahasiswa ..">
+                      </div>
+                      <div class="form-group">
+                        <label>NIK</label>
+                        <input type="text" name="nik" required="required" class="form-control" placeholder="NIK ..">
+                      </div>
+                      <div class="form-group">
+                        <label>Alamat</label>
+                        <input type="text" name="alamat_mhs" required="required" class="form-control" placeholder="Alamat ..">
+                      </div>
+                      <div class="form-group">
+                        <label>Status Vaksinasi</label>
+                        <input type="text" name="status_vaksinasi" required="required" class="form-control" placeholder="Status Vaksinasi ..">
                       </div>
 
                     </div>
@@ -58,7 +74,11 @@
                 <thead>
                   <tr>
                     <th width="1%">NO</th>
+                    <th>NIM</th>
                     <th>NAMA</th>
+                    <th>NIK</th>
+                    <th>ALAMAT</th>
+                    <th>STATUS VAKSINASI</th>
                     <th width="10%">OPSI</th>
                   </tr>
                 </thead>
@@ -71,7 +91,11 @@
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
+                      <td><?php echo $d['nim_mhs']; ?></td>
                       <td><?php echo $d['nama_mhs']; ?></td>
+                      <td><?php echo $d['nik']; ?></td>
+                      <td><?php echo $d['alamat_mhs']; ?></td>
+                      <td><?php echo $d['status_vaksinasi']; ?></td>
                       <td>     
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_mhs_<?php echo $d['id_mhs'] ?>">
                           <i class="fa fa-cog"></i>
@@ -94,9 +118,9 @@
                                 <div class="modal-body">
 
                                   <div class="form-group" style="width:100%">
-                                    <label>Nama Mahasiswa</label>
-                                    <input type="hidden" name="id_mhs" required="required" class="form-control" placeholder="Nama Mahasiswa .." value="<?php echo $d['id_mhs']; ?>">
-                                    <input type="text" name="nama_mhs" required="required" class="form-control" placeholder="Nama Mahasiswa .." value="<?php echo $d['nama_mhs']; ?>" style="width:100%">
+                                    <label>Status Vaksinasi</label>
+                                    <input type="hidden" name="id_mhs" required="required" class="form-control" placeholder="Status Vaksinasi .." value="<?php echo $d['id_mhs']; ?>">
+                                    <input type="text" name="status_vaksinasi" required="required" class="form-control" placeholder="Status Vaksinasi .." value="<?php echo $d['status_vaksinasi']; ?>" style="width:100%">
                                   </div>
 
                                 </div>
