@@ -29,11 +29,15 @@ include '../koneksi.php';
             <form action="user_update.php" method="post" enctype="multipart/form-data">
               <?php 
               $id = $_GET['id'];              
-              $data = mysqli_query($koneksi, "SELECT * FROM admin inner join user on admin.id_user = user.user_id where user.user_id='$id'");
+              $data = mysqli_query($koneksi, "select * from user where user_id='$id'");
               while($d = mysqli_fetch_array($data)){
                 ?>
 
-
+                <div class="form-group">
+                  <label>Nama</label>
+                  <input type="text" class="form-control" name="nama" value="<?php echo $d['user_nama'] ?>" required="required">
+                  <input type="hidden" class="form-control" name="id" value="<?php echo $d['user_id'] ?>" required="required">
+                </div>
 
                 <div class="form-group">
                   <label>Username</label>
