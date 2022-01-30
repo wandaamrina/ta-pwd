@@ -3,10 +3,9 @@
 <div class="content-wrapper">
 
   <section class="content-header">
-    <h1 align="center">Data Mahasiswa</h1>
-
-    <ol class="breadcrumb">
-    </ol>
+    <h1 align="center">
+      Informasi Vaksin
+    </h1>
   </section>
 
   <section class="content">
@@ -18,19 +17,20 @@
             <div class="btn-group pull-right">            
 
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
-                <i class="fa fa-plus"></i> &nbsp Tambah Mahasiswa
+                <i class="fa fa-plus"></i> &nbsp Tambah Vaksin
               </button>
             </div>
           </div>
+        
           <div class="box-body">
-
+            
             <!-- Modal -->
-            <form action="mahasiswa_act.php" method="post">
+            <form action="vaksin_act.php" method="post">
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Tambah Mahasiswa</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Tambah Vaksin</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -38,26 +38,13 @@
                     <div class="modal-body">
 
                       <div class="form-group">
-                        <label>NIM Mahasiswa</label>
-                        <input type="text" name="nim_mhs" required="required" class="form-control" placeholder="NIM Mahasiswa ..">
+                        <label>Jenis Vaksin</label>
+                        <input type="text" name="jenis_vaksin" required="required" class="form-control" placeholder="Jenis Vaksin ..">
                       </div>
                       <div class="form-group">
-                        <label>Nama Mahasiswa</label>
-                        <input type="text" name="nama_mhs" required="required" class="form-control" placeholder="Nama Mahasiswa ..">
-                      </div>
-                      <div class="form-group">
-                        <label>NIK</label>
-                        <input type="text" name="nik" required="required" class="form-control" placeholder="NIK ..">
-                      </div>
-                      <div class="form-group">
-                        <label>Alamat</label>
-                        <input type="text" name="alamat_mhs" required="required" class="form-control" placeholder="Alamat ..">
-                      </div>
-                      <div class="form-group">
-                        <label>Status Vaksinasi</label>
-                        <input type="text" name="status_vaksinasi" required="required" class="form-control" placeholder="Status Vaksinasi ..">
-                      </div>
-
+                        <label>Dosis</label>
+                        <input type="number" name="dosis" required="required" class="form-control" placeholder="Dosis ..">
+                      </div>                   
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -68,59 +55,53 @@
               </div>
             </form>
 
-
             <div class="table-responsive">
-              <table class="table table-bordered table-striped" id="table-datatable">
+              <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="1%">NO</th>
-                    <th>NIM</th>
-                    <th>NAMA</th>
-                    <th>NIK</th>
-                    <th>ALAMAT</th>
-                    <th>STATUS VAKSINASI</th>
-                    <th width="10%">OPSI</th>
+                    <th>Vaksin</th>
+                    <th>Dosis</th>
+                    <th width="10%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi,"SELECT * FROM mahasiswa ORDER BY nim_mhs ASC");
+                  $data = mysqli_query($koneksi,"SELECT * FROM vaksin");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
-                      <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nim_mhs']; ?></td>
-                      <td><?php echo $d['nama_mhs']; ?></td>
-                      <td><?php echo $d['nik']; ?></td>
-                      <td><?php echo $d['alamat_mhs']; ?></td>
-                      <td><?php echo $d['status_vaksinasi']; ?></td>
-                      <td>     
-                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_mhs_<?php echo $d['id_mhs'] ?>">
+                      <td><?php echo $d['jenis_vaksin']; ?></td>
+                      <td><?php echo $d['dosis']; ?></td>
+                      <td>    
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_vaksin_<?php echo $d['id_vaksin'] ?>">
                           <i class="fa fa-cog"></i>
                         </button>
-
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_mhs_<?php echo $d['id_mhs'] ?>">
+                        
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_vaksin_<?php echo $d['id_vaksin'] ?>">
                           <i class="fa fa-trash"></i>
                         </button>
 
-                        <form action="mahasiswa_update.php" method="post">
-                          <div class="modal fade" id="edit_mhs_<?php echo $d['id_mhs'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="vaksin_update.php" method="post">
+                          <div class="modal fade" id="edit_vaksin_<?php echo $d['id_vaksin'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Edit Mahasiswa</h5>
+                                  <h4 class="modal-title" id="exampleModalLabel">Edit Vaksin</h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
                                 <div class="modal-body">
-
-                                  <div class="form-group" style="width:100%">
-                                    <label>Status Vaksinasi</label>
-                                    <input type="hidden" name="id_mhs" required="required" class="form-control" placeholder="Status Vaksinasi .." value="<?php echo $d['id_mhs']; ?>">
-                                    <input type="text" name="status_vaksinasi" required="required" class="form-control" placeholder="Status Vaksinasi .." value="<?php echo $d['status_vaksinasi']; ?>" style="width:100%">
+                                  <div class="form-group" style="margin-bottom:15px;width: 100%">
+                                    <label>Jenis Vaksin</label>
+                                    <input type="hidden" name="id_vaksin" required="required" class="form-control" placeholder=".." value="<?php echo $d['id_vaksin']; ?>">
+                                    <input type="text" name="jenis_vaksin" style="width:100%" required="required" class="form-control" placeholder="Jenis Vaksin  .." value="<?php echo $d['jenis_vaksin']; ?>">
+                                  </div>
+                                  <div class="form-group" style="margin-bottom:15px;width: 100%">
+                                    <label>Dosis</label>
+                                    <input type="number" name="dosis" style="width:100%" required="required" class="form-control" placeholder="Dosis  .." value="<?php echo $d['dosis']; ?>">
                                   </div>
 
                                 </div>
@@ -134,7 +115,7 @@
                         </form>
 
                         <!-- modal hapus -->
-                        <div class="modal fade" id="hapus_mhs_<?php echo $d['id_mhs'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="hapus_vaksin_<?php echo $d['id_vaksin'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -150,26 +131,24 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <a href="mahasiswa_hapus.php?id=<?php echo $d['id_mhs'] ?>" class="btn btn-primary">Hapus</a>
+                                <a href="vaksin_hapus.php?id=<?php echo $d['id_vaksin'] ?>" class="btn btn-primary">Hapus</a>
                               </div>
                             </div>
                           </div>
                         </div>
-
                       </td>
                     </tr>
+      
                     <?php 
                   }
                   ?>
                 </tbody>
               </table>
-            </div>
-          </div>
-
-        </div>
+            </div> <!-- responsive -->
+          </div> <!-- body -->
+                </div>
+        </div><!-- row -->
       </section>
-    </div>
-  </section>
 
 </div>
 <?php include 'footer.php'; ?>
