@@ -93,7 +93,7 @@
           </li>
 
           <li>
-            <a href="bank.php">
+            <a href="vaksin.php">
               <i class="fa fa-folder"></i> <span>DATA VAKSIN</span>
             </a>
           </li>
