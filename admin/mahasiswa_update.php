@@ -1,7 +1,7 @@
 <?php 
 include '../koneksi.php';
-$id  = $_POST['id'];
-$kategori  = $_POST['kategori'];
+$id_mhs  = $_POST['id_mhs'];
+$nama_mhs  = $_POST['nama_mhs'];
 
-mysqli_query($koneksi, "update kategori set kategori='$kategori' where kategori_id='$id'");
-header("location:kategori.php");
+mysqli_query($koneksi, "update nama_mhs set nama_mhs='$nama_mhs' where id_mhs='$id_mhs'");
+header("location:mahasiswa.php");
