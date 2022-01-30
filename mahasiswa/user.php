@@ -35,12 +35,12 @@
                   <?php 
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi,"SELECT * FROM admin inner join user on admin.id_user = user.user_id");
+                  $data = mysqli_query($koneksi,"SELECT * FROM user");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nama_admin']; ?></td>
+                      <td><?php echo $d['user_nama']; ?></td>
                       <td><?php echo $d['user_username']; ?></td>
                       <td>                        
                         <a class="btn btn-warning btn-sm" href="user_edit.php?id=<?php echo $d['user_id'] ?>"><i class="fa fa-cog"></i></a>
