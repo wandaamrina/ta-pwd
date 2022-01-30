@@ -1,6 +1,6 @@
 <?php 
 include '../koneksi.php';
-$kategori  = $_POST['kategori'];
+$nama_mhs  = $_POST['nama_mhs'];
 
-mysqli_query($koneksi, "insert into kategori values (NULL,'$kategori')");
-header("location:kategori.php");
+mysqli_query($koneksi, "insert into nama_mhs values (NULL,'$nama_mhs')");
+header("location:mahasiswa.php");
