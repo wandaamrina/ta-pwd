@@ -19,7 +19,7 @@
 
       <center>
 
-        <h2>Login Aplikasi Keuangan Anisah Studio</h2>
+        <h2>Sistem Informasi <br> Vaksinasi Mahasiswa</h2>
         
 
         <br/>
@@ -32,6 +32,8 @@
             echo "<div class='alert alert-success'>ANDA TELAH BERHASIL LOGOUT</div>";
           }else if($_GET['alert'] == "belum_login"){
             echo "<div class='alert alert-warning'>ANDA HARUS LOGIN UNTUK MENGAKSES DASHBOARD</div>";
+          }else if($_GET['alert'] == "mhs"){
+            echo "<div class='alert alert-warning'>ANDA MAHASISWA</div>";
           }
         }
         ?>
