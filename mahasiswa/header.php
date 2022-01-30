@@ -59,13 +59,13 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <?php 
                 $id_user = $_SESSION['id'];
-                $profil = mysqli_query($koneksi,"select * from admin where id_user='$id_user'");
+                $profil = mysqli_query($koneksi,"select * from user where user_id='$id_user'");
                 $profil = mysqli_fetch_assoc($profil);
                 
                   ?>
                   <img src="../gambar/sistem/user.png" class="user-image">
                
-                <span class="hidden-xs"><?php echo $profil['nama_admin']; ?></span>
+                <span class="hidden-xs"><?php echo $_SESSION['nama']; ?></span>
               </a>
             </li>
            
@@ -87,13 +87,13 @@
           </li>
 
           <li>
-            <a href="mahasiswa.php">
+            <a href="kategori.php">
               <i class="fa fa-folder"></i> <span>DATA MAHASISWA</span>
             </a>
           </li>
 
           <li>
-            <a href="bank.php">
+            <a href="transaksi.php">
               <i class="fa fa-folder"></i> <span>DATA VAKSIN</span>
             </a>
           </li>
