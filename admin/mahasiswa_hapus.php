@@ -1,8 +1,13 @@
 <?php 
 include '../koneksi.php';
-$id  = $_GET['id'];
 
-mysqli_query($koneksi, "update transaksi set transaksi_kategori='1' where transaksi_kategori='$id'");
+$id_mhs  = $_GET['id'];
 
-mysqli_query($koneksi, "delete from kategori where kategori_id='$id'");
-header("location:kategori.php");
+$mhs = mysqli_query($koneksi,"select * from user inner join mahasiswa on mahasiswa.id_user = user.user_id where mahasiswa.id_mhs='$id_mhs'");
+$p = mysqli_fetch_assoc($mhs);
+$id = $p['user_id'];
+
+mysqli_query($koneksi, "delete from user where user_id='$id'");
+// mysqli_query($koneksi, "delete from mahasiswa where id_mhs='$id_mhs'");
+header("location:mahasiswa.php");
+
