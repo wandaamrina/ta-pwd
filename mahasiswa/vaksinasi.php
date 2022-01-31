@@ -3,7 +3,7 @@
 <div class="content-wrapper">
 
   <section class="content-header">
-    <h1 align="center">Data Mahasiswa</h1>
+    <h1 align="center">Data Vaksinasi</h1>
 
     <ol class="breadcrumb">
     </ol>
@@ -13,28 +13,15 @@
     <div class="row">
       <section class="col-lg-12">
         <div class="box box-info">
-
-          <div class="box-header">
-            <div class="btn-group pull-left">          
-              <a href="mahasiswa_json.php" class="btn btn-success btn-sm pull-right">JSON</a>
-              <a href="mahasiswa_xml.php" class="btn btn-danger btn-sm pull-right">XML</a>
-            </div>
-            <div class="btn-group pull-right">            
-              <a href="mahasiswa_tambah.php" class="btn btn-info btn-sm pull-right"><i class="fa fa-plus"></i> &nbsp Tambah Mahasiswa</a> 
-            </div>
-          </div>
           <div class="box-body">
-
             <div class="table-responsive">
               <table class="table table-bordered table-striped" id="table-datatable">
                 <thead>
                   <tr>
-                    <th width="1%" class="text-center">NO</th>
-                    <th class="text-center">NIM</th>
-                    <th class="text-center">NAMA</th>
-                    <th class="text-center">NIK</th>
-                    <th class="text-center">ALAMAT</th>
-                    <th class="text-center">STATUS VAKSINASI</th>
+                    <th width="1%">NO</th>
+                    <th width="1%">Tanggal Vaksin</th>
+                    <th width="1%">Jenis Vaksin</th>
+                    <th width="1%">Dosis</th>
                     <th width="10%" class="text-center">OPSI</th>
                   </tr>
                 </thead>
@@ -42,32 +29,31 @@
                   <?php 
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi,"SELECT * FROM mahasiswa ORDER BY nim_mhs ASC");
+                  $data = mysqli_query($koneksi,"SELECT * FROM vaksinasi inner join mahasiswa on  mahasiswa.id_mhs = vaksinasi.id_mhs inner join vaksin on vaksin.id_vaksin = vaksinasi.id_vaksin where mahasiswa.id_user = '$_SESSION[id]' ORDER BY id_vaksinasi ASC");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
-                      <td class="text-center"><?php echo $no++; ?></td>
-                      <td><?php echo $d['nim_mhs']; ?></td>
-                      <td><?php echo $d['nama_mhs']; ?></td>
-                      <td><?php echo $d['nik']; ?></td>
-                      <td><?php echo $d['alamat_mhs']; ?></td>
-                      <td class="text-center"><?php echo $d['status_vaksinasi']; ?></td>
-                      <td class="text-center">     
-
-                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_mhs_<?php echo $d['id_mhs'] ?>">
+                      <td><?php echo $no++; ?></td>
+                      <td><?php echo date('d F Y', strtotime($d['tgl_vaksin'])); ?></td>
+                      <td><?php echo $d['jenis_vaksin']; ?></td>
+                      <td><?php echo $d['dosis']; ?></td>
+                      <td>
+                        <center>     
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_vaksinasi_<?php echo $d['id_vaksinasi'] ?>">
                           <i class="fa fa-cog"></i>
                         </button>
 
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_mhs_<?php echo $d['id_mhs'] ?>">
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_vaksinasi_<?php echo $d['id_vaksinasi'] ?>">
                           <i class="fa fa-trash"></i>
                         </button>
+                        </center>
 
-                        <form action="mahasiswa_update.php" method="post">
-                          <div class="modal fade" id="edit_mhs_<?php echo $d['id_mhs'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="vaksinasi_update.php" method="post">
+                          <div class="modal fade" id="edit_vaksinasi_<?php echo $d['id_vaksinasi'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Edit Mahasiswa</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel">Edit Vaksinasi</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -75,10 +61,9 @@
                                 <div class="modal-body">
 
                                   <div class="form-group" style="width:100%">
-                                    <label>Status Vaksinasi</label>
-                                    <input type="hidden" name="id_mhs" required="required" class="form-control" placeholder="Status Vaksinasi .." value="<?php echo $d['id_mhs']; ?>">
-                                    <input type="text" name="status_vaksinasi" required="required" class="form-control" placeholder="Status Vaksinasi .." value="<?php echo $d['status_vaksinasi']; ?>" style="width:100%">
-
+                                    <label>Tanggal Vaksinasi</label>
+                                    <input type="hidden" name="id_vaksinasi" required="required" class="form-control" placeholder="Tanggal Vaksinasi .." value="<?php echo $d['id_vaksinasi']; ?>">
+                                    <input type="text" name="tgl_vaksin" required="required" class="form-control" placeholder="Tanggal Vaksinasi .." value="<?php echo $d['tgl_vaksin']; ?>" style="width:100%">
                                   </div>
 
                                 </div>
@@ -92,7 +77,7 @@
                         </form>
 
                         <!-- modal hapus -->
-                        <div class="modal fade" id="hapus_mhs_<?php echo $d['id_mhs'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="hapus_vaksinasi_<?php echo $d['id_vaksinasi'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -108,7 +93,7 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <a href="mahasiswa_hapus.php?id=<?php echo $d['id_mhs'] ?>" class="btn btn-primary">Hapus</a>
+                                <a href="vaksinasi_hapus.php?id_vaksinasi=<?php echo $d['id_vaksinasi'] ?>" class="btn btn-primary">Hapus</a>
                               </div>
                             </div>
                           </div>

@@ -22,8 +22,8 @@ if($cek > 0){
 		header("location:admin/");
 	}else{
 		$_SESSION['status'] = "mhs_logedin";
-		header("location:index.php?alert=mhs");
-		// header("location:mahasiswa/");
+		header("location:mahasiswa/");
+
 	}
 	
 }else{
