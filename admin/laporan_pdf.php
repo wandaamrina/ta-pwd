@@ -14,9 +14,9 @@ $pdf->AddPage();
 // setting jenis font yang akan digunakan
 $pdf->SetFont('Arial','B',14);
 // mencetak string 
-$pdf->Cell(280,7,'SISTEM INFORMASI KEUANGAN',0,1,'C');
+$pdf->Cell(280,7,'SISTEM PENDATAAN VAKSIN MAHASISWA UAD',0,1,'C');
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(280,7,'LAPORAN KEUANGAN',0,1,'C');
+$pdf->Cell(280,7,'LAPORAN VAKSINASI',0,1,'C');
 
 // Memberikan space kebawah agar tidak terlalu rapat
 $pdf->Cell(10,7,'',0,1);
@@ -30,15 +30,15 @@ $pdf->Cell(35,6,'SAMPAI TANGGAL',0,0);
 $pdf->Cell(5,6,':',0,0);
 $pdf->Cell(35,6, date('d-m-Y', strtotime($tgl_sampai)) ,0,0);
 $pdf->Cell(10,7,'',0,1);
-$pdf->Cell(35,6,'KATEGORI',0,0);
+$pdf->Cell(35,6,'JENIS VAKSIN',0,0);
 $pdf->Cell(5,6,':',0,0);
-$kategori = $_GET['kategori'];
-if($kategori == "semua"){
-  $kkk = "SEMUA KATEGORI";
+$jenis_vaksin = $_GET['jenis_vaksin'];
+if($jenis_vaksin == "semua"){
+  $kkk = "SEMUA JENIS VAKSIN";
 }else{
-  $k = mysqli_query($koneksi,"select * from kategori where kategori_id='$kategori'");
+  $k = mysqli_query($koneksi,"select * from vaksin where id_vaksin='$jenis_vaksin'");
   $kk = mysqli_fetch_assoc($k);
-  $kkk = $kk['kategori'];
+  $kkk = $kk['jenis_vaksin'];
 }
 $pdf->Cell(35,6, $kkk ,0,0);
 
@@ -48,10 +48,11 @@ $pdf->SetFont('Arial','B',10);
 
 $pdf->Cell(10,14,'NO',1,0,'C');
 $pdf->Cell(35,14,'TANGGAL',1,0,'C');
-$pdf->Cell(45,14, 'KATEGORI' ,1,0,'C');
-$pdf->Cell(105,14,'KETERANGAN',1,0,'C');
+$pdf->Cell(45,14, 'NIM' ,1,0,'C');
+$pdf->Cell(105,14,'NAMA',1,0,'C');
 
-$pdf->Cell(82,7,'JENIS',1,0,'C');
+$pdf->Cell(82,7,'JENIS VAKSIN',1,0,'C');
+$pdf->Cell(82,7,'DOSIS',1,0,'C');
 $pdf->Cell(1,7,'',0,1);
 $pdf->Cell(195,7,'',0,0);
 $pdf->Cell(41,7,'PEMASUKAN',1,0,'C');
