@@ -24,6 +24,13 @@
               <div class="form-group">
                 <label>Nama</label>
                 <input type="text" class="form-control" name="nama" required="required" placeholder="Masukkan Nama ..">
+                <?php 
+                if(isset($_GET['nama'])){
+                  if($_GET['nama'] == "error"){
+                    echo "<p style='color:red'>Inputan Hanya boleh huruf dan spasi !</p>";
+                  }
+                }
+                ?>
               </div>
               <div class="form-group">
                 <label>Username</label>

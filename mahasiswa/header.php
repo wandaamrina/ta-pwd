@@ -24,7 +24,7 @@
   <?php 
   include '../koneksi.php';
   session_start();
-  if($_SESSION['status'] != "administrator_logedin"){
+  if($_SESSION['status'] != "mhs_logedin"){
     header("location:../index.php?alert=belum_login");
   }
   ?>
@@ -59,13 +59,13 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <?php 
                 $id_user = $_SESSION['id'];
-                $profil = mysqli_query($koneksi,"select * from user where user_id='$id_user'");
+                $profil = mysqli_query($koneksi,"select * from mahasiswa where id_user='$id_user'");
                 $profil = mysqli_fetch_assoc($profil);
                 
                   ?>
                   <img src="../gambar/sistem/user.png" class="user-image">
                
-                <span class="hidden-xs"><?php echo $_SESSION['nama']; ?></span>
+                <span class="hidden-xs"><?php echo $profil['nama_mhs']; ?></span>
               </a>
             </li>
            
@@ -87,32 +87,8 @@
           </li>
 
           <li>
-            <a href="kategori.php">
-              <i class="fa fa-folder"></i> <span>DATA MAHASISWA</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="transaksi.php">
-              <i class="fa fa-folder"></i> <span>DATA VAKSIN</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="hutang.php">
-              <i class="fa fa-folder"></i> <span>DATA VAKSINASI</span>
-            </a>
-          </li>
-
-         <li>
-            <a href="user.php">
-              <i class="fa fa-building"></i> <span>DATA USER</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="laporan.php">
-              <i class="fa fa-file"></i> <span>LAPORAN</span>
+            <a href="vaksinasi.php">
+              <i class="fa fa-folder"></i> <span>RIWAYAT VAKSINASI</span>
             </a>
           </li>
 

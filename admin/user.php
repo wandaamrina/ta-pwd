@@ -45,7 +45,31 @@
                       <td>                        
                         <a class="btn btn-warning btn-sm" href="user_edit.php?id=<?php echo $d['user_id'] ?>"><i class="fa fa-cog"></i></a>
                         <?php if($d['user_id'] != 1){ ?>
-                          <a class="btn btn-danger btn-sm" href="user_hapus.php?id=<?php echo $d['user_id'] ?>"><i class="fa fa-trash"></i></a>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_user_<?php echo $d['user_id'] ?>">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                        <!-- modal hapus -->
+                        <div class="modal fade" id="hapus_user_<?php echo $d['user_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Peringatan!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+
+                                <p>Yakin ingin menghapus data ini ?</p>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <a href="user_hapus.php?id=<?php echo $d['user_id'] ?>" class="btn btn-primary">Hapus</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <?php } ?>
                       </td>
                     </tr>
