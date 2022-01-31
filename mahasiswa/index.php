@@ -3,114 +3,77 @@
 <div class="content-wrapper">
 
   <section class="content-header">
-    <h1 style="margin-top: 20px"  align="center"> Grafik Vaksinasi Mahasiswa </h1><br>
+    <h1 align="center">Data Vaksinasi</h1>
+    <ol class="breadcrumb">
+    </ol>
   </section>
 
-
   <section class="content">
-
     <div class="row">
+      <section class="col-lg-6 col-lg-offset-3">       
+        <div class="box box-info">
 
-      <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-green">
-          <div class="inner">
+          <div class="box-header">
+            <center><h3 class="box-title">Tambah Data Vaksinasi</h3></center><br>
             <?php 
-            $tanggal = date('Y-m-d');
-            $mhs = mysqli_query($koneksi,"SELECT count(id_mhs) as total_mhs FROM mahasiswa");
-            $p = mysqli_fetch_assoc($mhs);
-            ?>
-            <h4 style="font-weight: bolder"><?php echo $p['total_mhs'] ?></h4>
-            <p>Jumlah Mahasiswa</p>
+                if(isset($_GET['nik'])){
+                  if($_GET['nik'] == "done"){
+                    echo "<p style='color:red'>Pendaftaran data vaksinaasi telah dilakukan !</p>";
+                  }
+                }
+            ?> 
           </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-          
-        </div>
-      </div>
+          <div class="box-body">
+            <form action="vaksinasi_act.php" method="post" enctype="multipart/form-data">
+              <?php 
+                $id_user = $_SESSION['id'];
+                $profil = mysqli_query($koneksi,"select * from mahasiswa where id_user='$id_user'");
+                $profil = mysqli_fetch_assoc($profil);
+              ?>
+              <div class="form-group">
+                <label>NIM</label>
+                <input type="text" name="nim" required="required" class="form-control" value="<?php echo $profil['nim_mhs']; ?>" readonly>
+              </div>
 
-      <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-blue">
-          <div class="inner">
-            <?php 
-            $mhs = mysqli_query($koneksi,"SELECT count(id_mhs) as total_mhs FROM mahasiswa where status_vaksinasi='SUDAH'");
-            $p = mysqli_fetch_assoc($mhs);
-            ?>
-            <h4 style="font-weight: bolder"><?php echo $p['total_mhs'] ?></h4>
-            <p>Mahasiswa yang sudah divaksin</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-orange">
-          <div class="inner">
-            <?php 
-            $mhs = mysqli_query($koneksi,"SELECT count(id_mhs) as total_mhs FROM mahasiswa where status_vaksinasi='BELUM'");
-            $p = mysqli_fetch_assoc($mhs);
-            ?>
-            <h4 style="font-weight: bolder"><?php echo $p['total_mhs'] ?></h4>
-            <p>Mahasiswa yang belum divaksin</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- /.row -->
-    <!-- Main row -->
-    <div class="row">
-
-      <!-- Left col -->
-      <section class="col-lg-8">
-
-        <div class="nav-tabs-custom">
-
-          <ul class="nav nav-tabs pull-right">
-            <!-- <li><a href="#tab2" data-toggle="tab">Pemasukan</a></li> -->
-            <li class="active"><a href="#tab1" data-toggle="tab">Vaksinasi Mahasiswa</a></li>
-            <li class="pull-left header">Grafik</li>
-          </ul>
-
-          <div class="tab-content" style="padding: 20px">
-
-            <div class="chart tab-pane active" id="tab1">
-
+              <div class="form-group">
+                <label>NIK</label>
+                <input type="number" name="nik" required="required" class="form-control" value="<?php echo $profil['nik']; ?>" placeholder="<?php if($profil['nik'] == '-'){ echo "Masukkan NIK Mahasiswa .."; }else{ echo $profil['nik']; }  ?>">
+                <?php 
+                if(isset($_GET['nik'])){
+                  if($_GET['nik'] == "error"){
+                    echo "<p style='color:red'>NIK sudah terdaftar !</p>";
+                  }
+                }
+                ?>
+              </div>
               
-              <h4 class="text-center">Grafik Data Vaksinasi Mahasiswa</h4>
-              <canvas id="grafik1" style="position: relative; height: 300px;"></canvas>
+              <div class="form-group">
+                <label>Tanggal Vaksin</label>
+                <input type="date" name="tgl_vaksin" required="required" class="form-control" placeholder="Pilih tanggal vaksinasi ..">
+              </div>
 
-              <br/>
-              <br/>
-              <br/
-
-            </div>
+              <div class="form-group">
+                <label>Jenis Vaksin</label>
+                <!-- <input type="number" name="nominal" required="required"  placeholder="Masukkan ID Vaksin .."> -->
+                <select name="jenis_vaksin" class="form-control">
+                  <?php 
+                  include '../koneksi.php';
+                  $no=1;
+                  $data = mysqli_query($koneksi,"SELECT * FROM vaksin ORDER BY id_vaksin ASC");
+                  while($d = mysqli_fetch_array($data)){
+                    ?>
+                    <option value="<?php echo $d['id_vaksin']; ?>"><?php echo $d['jenis_vaksin']."  dosis ".$d['dosis']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+              <center><button type="submit" class="btn btn-primary">Simpan</button></center>
+            </form>
           </div>
 
         </div>
-
       </section>
-      <!-- /.Left col -->
-
-
-      <section class="col-lg-4">
-
-
-      </section>
-      <!-- right col -->
     </div>
-    <!-- /.row (main row) -->
-
-
-
   </section>
 
 </div>
-
-
 <?php include 'footer.php'; ?>

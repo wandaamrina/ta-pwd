@@ -32,9 +32,7 @@ include '../koneksi.php';
               $data = mysqli_query($koneksi, "SELECT * FROM admin inner join user on admin.id_user = user.user_id where user.user_id='$id'");
               while($d = mysqli_fetch_array($data)){
                 ?>
-
-
-
+                
                 <div class="form-group">
                   <label>Username</label>
                   <input type="text" class="form-control" name="username" value="<?php echo $d['user_username'] ?>" required="required">
