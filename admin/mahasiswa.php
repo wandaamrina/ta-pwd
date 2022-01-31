@@ -24,6 +24,7 @@
             </div>
           </div>
           <div class="box-body">
+
             <div class="table-responsive">
               <table class="table table-bordered table-striped" id="table-datatable">
                 <thead>
@@ -52,6 +53,7 @@
                       <td><?php echo $d['alamat_mhs']; ?></td>
                       <td class="text-center"><?php echo $d['status_vaksinasi']; ?></td>
                       <td class="text-center">     
+
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_mhs_<?php echo $d['id_mhs'] ?>">
                           <i class="fa fa-cog"></i>
                         </button>
@@ -76,6 +78,7 @@
                                     <label>Status Vaksinasi</label>
                                     <input type="hidden" name="id_mhs" required="required" class="form-control" placeholder="Status Vaksinasi .." value="<?php echo $d['id_mhs']; ?>">
                                     <input type="text" name="status_vaksinasi" required="required" class="form-control" placeholder="Status Vaksinasi .." value="<?php echo $d['status_vaksinasi']; ?>" style="width:100%">
+
                                   </div>
 
                                 </div>

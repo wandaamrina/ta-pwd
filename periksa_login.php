@@ -23,6 +23,7 @@ if($cek > 0){
 	}else{
 		$_SESSION['status'] = "mhs_logedin";
 		header("location:mahasiswa/");
+
 	}
 	
 }else{

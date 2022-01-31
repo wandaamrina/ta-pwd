@@ -60,12 +60,13 @@
                 <?php 
                 $id_user = $_SESSION['id'];
                 $profil = mysqli_query($koneksi,"select * from mahasiswa where id_user='$id_user'");
+
                 $profil = mysqli_fetch_assoc($profil);
                 
                   ?>
                   <img src="../gambar/sistem/user.png" class="user-image">
-               
                 <span class="hidden-xs"><?php echo $profil['nama_mhs']; ?></span>
+
               </a>
             </li>
            
@@ -89,6 +90,7 @@
           <li>
             <a href="vaksinasi.php">
               <i class="fa fa-folder"></i> <span>RIWAYAT VAKSINASI</span>
+
             </a>
           </li>
 

@@ -100,6 +100,7 @@
 
           <li>
             <a href="vaksinasi.php">
+
               <i class="fa fa-folder"></i> <span>DATA VAKSINASI</span>
             </a>
           </li>

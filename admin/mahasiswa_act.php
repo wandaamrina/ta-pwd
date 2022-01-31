@@ -1,5 +1,6 @@
 <?php 
 include '../koneksi.php';
+
 $nim_mhs  = $_POST['nim_mhs'];
 $username  = $_POST['nim_mhs'];
 $pass  = md5($_POST['nim_mhs']);
@@ -16,3 +17,4 @@ $id = $p['user_id'];
 
 mysqli_query($koneksi, "insert into mahasiswa values (NULL,'$nim_mhs','$nama_mhs','-','$alamat_mhs','$status_vaksinasi','$id')");
 header("location:mahasiswa.php");
+
